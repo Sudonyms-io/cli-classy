@@ -17,7 +17,7 @@ const COMMAND_CONFIG = {
     },
     TEST: {
         command: './node_modules/.bin/mocha',
-        args: ['-r', 'ts-node/register', '.src/**/*.spec.ts']
+        args: ['-r', 'ts-node/register', './src/**/*.spec.ts']
     },
     COMPILE: {
         command: './node_modules/.bin/tsc',
