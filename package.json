@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Sudo-Nym, <sudo-nym@outlook.com> (https://github.com/TylerDurham)",
+  "author": "Sudo-Nymd, <sudo-nym@outlook.com> (https://github.com/sudo-nymd/cli-stylesheets)",
   "license": "MIT",
   "devDependencies": {
     "@types/chai": "^4.3.1",
