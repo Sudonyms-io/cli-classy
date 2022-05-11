@@ -11,7 +11,12 @@ enum TokenTypeOptions {
     IsPunctuation = 1 << 7,
     IsEndPuncuation = 1 << 8,
     IsWhitespace = 1 << 9,
+    IsFilePath = 1 << 10,
     IsUnknown = 1 << 16
+}
+
+const getFilePattern = () => {
+    return /^([a-zA-Z]):[\\\/]((?:[^<>:"\\\/\|\?\*]+[\\\/])*)([^<>:"\\\/\|\?\*]+)\.([^<>:"\\\/\|\?\*\s]+)$/gim;
 }
 
 const TOKENTYPELIST = [
@@ -34,6 +39,10 @@ const TOKENTYPELIST = [
     {
         type: TokenTypeOptions.InBraces,
         pattern: /\{[^\}]*\}/gim
+    },
+    {
+        type: TokenTypeOptions.IsFilePath,
+        pattern: getFilePattern()
     },
     {
         type: TokenTypeOptions.IsNumeric,
@@ -60,7 +69,7 @@ const findTokenType = (token: string) => {
     return (match) ? match : TokenTypeOptions.IsUnknown;
 }
 
-type Parsed = {
+export type Parsed = {
     name: string;
     type: TokenTypeOptions,
     token: any;
