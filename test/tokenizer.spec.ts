@@ -1,12 +1,10 @@
 import * as mocha from 'mocha';
 import { expect } from 'chai'
-import parse, { TokenTypeOptions } from './index';
+import parse, { TokenTypeOptions } from '../src/tokenizer/index';
 
-const ftto = (value: TokenTypeOptions) => {
-    return TokenTypeOptions[value];
-}
+import { countTokens, ftto } from './tokenizer.helper'
 
-describe(`Tests the parser`, function () {
+describe(`Tests the tokenizer module`, function () {
     it(`Tests bitwise parsing`, function(done){
         let text;
 
@@ -73,8 +71,7 @@ describe(`Tests the parser`, function () {
         expect(ast[13].token).to.equal('.', 'token did not match');
 
         // Check count of whitespace
-        tto = TokenTypeOptions.IsWhitespace;
-        expect(ast.filter((value) => value.type == tto).length).to.equal(6, `count of type ${ftto(tto)} didn't add up`);
+        countTokens(ast, TokenTypeOptions.IsWhitespace, 6);
 
         // Check count of date
         tto = TokenTypeOptions.IsDate;
@@ -91,3 +88,5 @@ describe(`Tests the parser`, function () {
         done();
     });
 });
+
+
