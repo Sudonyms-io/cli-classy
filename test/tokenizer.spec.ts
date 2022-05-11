@@ -2,9 +2,15 @@ import * as mocha from 'mocha';
 import { expect } from 'chai'
 import parse, { TokenTypeOptions } from '../src/tokenizer/index';
 
-import { countTokens, ftto } from './tokenizer.helper'
+import { countTokens, countTokenTypes, countTokenValues, tokensAreEqual, ftto, equals } from './tokenizer.spec.helper'
 
 describe(`Tests the tokenizer module`, function () {
+    it(`Tests phrases`, function(done) {
+        const text = `This is "a test of a phrase".`
+        const ast = parse(text);
+        console.log(ast);
+        done()
+    }),
     it(`Tests bitwise parsing`, function(done){
         let text;
 
@@ -14,8 +20,8 @@ describe(`Tests the tokenizer module`, function () {
         const DBLQUOTESINBRACES = TokenTypeOptions.InBraces | TokenTypeOptions.InDoubleQuotes;
         let tto: TokenTypeOptions;
 
-        expect(ast[0].type).to.equal(DATEINBRACKETS);
-        expect(ast.filter((value) => value.type == DBLQUOTESINBRACES).length).to.equal(1, `could not filter for ${DBLQUOTESINBRACES}`)
+        equals<TokenTypeOptions>(ast[0].type, DATEINBRACKETS);
+        countTokenTypes(ast, DBLQUOTESINBRACES, 1);
 
         // Filter for 
         tto = TokenTypeOptions.InDoubleQuotes;
@@ -25,26 +31,21 @@ describe(`Tests the tokenizer module`, function () {
     }),
     it(`Tests braces, whitespace, and parenthesis`, function(done) {
         const text = `The {request} is now (in-review)! Please (email) us for more information.`;
-        const ast = parse(text);
-        let tto: TokenTypeOptions;
-        let tv: string;
+        const ast = parse(text);        
 
         // Test number of items that came back
-        expect(ast, 'invalid array length').to.be.a('array').with.lengthOf(23);
+        countTokens(ast, 23);
 
         // Check count of braces
-        tto = TokenTypeOptions.InBraces;
-        expect(ast.filter((value) => value.type == tto).length).to.equal(1, `count of type ${ftto(tto)} didn't add up`);
+        countTokenTypes(ast, TokenTypeOptions.InBraces, 1);
+        countTokenValues(ast, '{request}', 1);
 
         // Check count of parenthesis
-        tto = TokenTypeOptions.InParenthesis;
-        tv = '(in-review)';
-        expect(ast.filter((value) => value.type == tto).length).to.equal(2, `count of type ${ftto(tto)} didn't add up`);
-        expect(ast.filter((value) => value.token === tv).length).to.equal(1, `count of token ${tv} did not add up`);
+        countTokenTypes(ast, TokenTypeOptions.InParenthesis, 2);
+        countTokenValues(ast, '(in-review)', 1);
 
         // Check count of whitespace
-        tto = TokenTypeOptions.IsWhitespace;
-        expect(ast.filter((value) => value.type == tto).length).to.equal(10, `count of type ${ftto(tto)} didn't add up`);
+        countTokenTypes(ast, TokenTypeOptions.IsWhitespace, 10);
 
         done();
         
@@ -56,34 +57,31 @@ describe(`Tests the tokenizer module`, function () {
 
         expect(ast, 'invalid array length').to.be.a('array').with.lengthOf(14);
         expect(ftto(ast[0].type)).to.equal(ftto(TokenTypeOptions.IsUnknown), 'invalid token type');
-        expect(ast[0].token).to.equal('The', 'token does not match');
+        tokensAreEqual(ast[0].token, 'The');
 
         expect(ftto(ast[1].type)).to.equal(ftto(TokenTypeOptions.IsWhitespace), 'invalid token type');
-        expect(ast[1].token).to.equal(' ', 'token did not match');
+        tokensAreEqual(ast[1].token, ' ');
 
         expect(ftto(ast[4].type)).to.equal(ftto(TokenTypeOptions.InBrackets), 'invalid token type');
-        expect(ast[4].token).to.equal('[my-command]', 'token did not match');
+        tokensAreEqual(ast[4].token, '[my-command]');
 
         expect(ftto(ast[12].type)).to.equal(ftto(TokenTypeOptions.IsDate), 'invalid token type');
-        expect(ast[12].token).to.equal('12/25/2020', 'token did not match');
+        tokensAreEqual(ast[12].token, '12/25/2020');
 
         expect(ftto(ast[13].type)).to.equal(ftto(TokenTypeOptions.IsPunctuation), 'invalid token type');
-        expect(ast[13].token).to.equal('.', 'token did not match');
+        tokensAreEqual(ast[13].token, '.');
 
         // Check count of whitespace
-        countTokens(ast, TokenTypeOptions.IsWhitespace, 6);
+        countTokenTypes(ast, TokenTypeOptions.IsWhitespace, 6);
 
         // Check count of date
-        tto = TokenTypeOptions.IsDate;
-        expect(ast.filter((value) => value.type == tto).length).to.equal(1, `count of type ${ftto(tto)} didn't add up`);
+        countTokenTypes(ast, TokenTypeOptions.IsDate, 1);
 
         // Check count of brackets
-        tto = TokenTypeOptions.InBrackets;
-        expect(ast.filter((value) => value.type == tto).length).to.equal(1, `count of type ${ftto(tto)} didn't add up`);
+        countTokenTypes(ast, TokenTypeOptions.InBrackets, 1);
 
         // Check count of puncuation
-        tto = TokenTypeOptions.IsPunctuation;
-        expect(ast.filter((value) => value.type == tto).length).to.equal(1, `count of type ${ftto(tto)} didn't add up`);
+        countTokenTypes(ast, TokenTypeOptions.IsPunctuation, 1);
 
         done();
     });
