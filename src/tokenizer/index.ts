@@ -57,8 +57,7 @@ type TokenFlagMap = {
 }
 const mapFlagsToTokens = (token): TokenFlagMap => {
     const defs = TokenFlagRegExMap.filter((def) => {
-        const result = (def.pattern !== null) ? def.pattern.test(token) : [];
-        return result;
+        return (def.pattern !== null) ? def.pattern.test(token) : false;
     });
     
     if (defs.length == 0) {

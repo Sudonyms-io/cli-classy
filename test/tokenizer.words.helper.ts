@@ -1,6 +1,6 @@
 import { TokenFlags } from "../src/tokenizer";
 import { TokenSpec } from "./common";
-
+  
 export const WORD_TOKEN_SPECs: TokenSpec[] = [
     {   
         description: "Tests a single word.",

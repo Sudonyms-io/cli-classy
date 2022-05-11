@@ -63,7 +63,7 @@ describe(`Tests the tokenizer module`, function () {
             // Parsed token should deep match spec token 
             expect(actual, description).to.have.deep.equals(expected, description)
         })
-    });
+    }); 
 
     it.only(`Running Single Word Token Tests`, function () {
         WORD_TOKEN_SPECs.forEach((spec) => {
