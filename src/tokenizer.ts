@@ -34,29 +34,23 @@ const TokenFlagsRegEx = new RegExp(TokenFlagsRegExMap.map((item) => {
     return item.pattern;
 }).join("|"), 'giy');
 
-//console.log(TokenFlagsRegEx)
-
-const init = (input) => {
-    return {
-        token: undefined,
-        flags: TokenFlags.Token,
-        index: 0,
-        length: 0
-    }
-}
+if (process.env.DEBUG || process.env.MOCHA_DEBUG) console.log(`RegExp: ${TokenFlagsRegEx}`);
 
 const parse = (text: string) => {
     let matches = TokenFlagsRegEx.exec(text);
     let results = [];
     
-
+    // Break up input into "tokens"
     while (matches != null) {
         const groups = matches.groups;
         for (const group in groups) {
+            // Get the named group - if it matched
             const token = groups[group];
+
+            // Did we get a match?
             if (token !== undefined) {
                 let flags = TokenFlags[group];
-                //flags = (flags & (TokenFlags.SingleQuoted && TokenFlags.Word)) ? TokenFlags.QuotedWord : flags
+                
                 if ((flags & TokenFlags.Word) && (flags & TokenFlags.SingleQuoted || flags & TokenFlags.DoubleQuoted)) {
                     flags = TokenFlags.QuotedWord
                 }
@@ -68,6 +62,7 @@ const parse = (text: string) => {
                 });
             }
         }
+        // Move to next match
         matches = TokenFlagsRegEx.exec(text);
     }
 
