@@ -1,4 +1,8 @@
 //const tokenizer = /(?<DoubleQuotedPhrase>["'].*["'])|(?<Whitespace>[\s]+)/gm
+
+/**
+ * Set of flags that indicate characterisics of a parsed token.
+ */
 export enum TokenFlags {
     Token = 0,
     Whitespace = 1,
@@ -36,8 +40,38 @@ const TokenFlagsRegEx = new RegExp(TokenFlagsRegExMap.map((item) => {
 
 if (process.env.DEBUG || process.env.MOCHA_DEBUG) console.log(`RegExp: ${TokenFlagsRegEx}`);
 
-const parse = (text: string) => {
-    let matches = TokenFlagsRegEx.exec(text);
+/**
+ * Represents a parsed token.
+ */
+export type Token = {
+    token: string;
+    flags: TokenFlags;
+    index: number;
+    length: number;
+}
+
+/**
+ * Represents the return structure of the parse operation.
+ */
+export type Parsed = {
+    /**
+     * The line of input that was parsed.
+     */
+    input: string;
+
+    /**
+     * The set of parsed tokens.
+     */
+    tokens: Token[];
+}
+
+/**
+ * Parses the input text into a set of tokens with flags that indicate the type of token.
+ * @param inputs A line of text to parse.
+ * @returns A parsed set of tokens.
+ */
+const parse = (inputs: string): Parsed => {
+    let matches = TokenFlagsRegEx.exec(inputs);
     let results = [];
     
     // Break up input into "tokens"
@@ -51,6 +85,7 @@ const parse = (text: string) => {
             if (token !== undefined) {
                 let flags = TokenFlags[group];
                 
+                // Add additional flags
                 if ((flags & TokenFlags.Word) && (flags & TokenFlags.SingleQuoted || flags & TokenFlags.DoubleQuoted)) {
                     flags = TokenFlags.QuotedWord
                 }
@@ -63,10 +98,10 @@ const parse = (text: string) => {
             }
         }
         // Move to next match
-        matches = TokenFlagsRegEx.exec(text);
+        matches = TokenFlagsRegEx.exec(inputs);
     }
 
-    return { tokens: results }
+    return { input: inputs, tokens: results }
 }
 
 export default parse;
