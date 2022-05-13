@@ -1,5 +1,6 @@
 import { TokenFlags } from "../src/tokenizer";
 import { blueBright, greenBright} from 'ansi-colors';
+import { expect } from "chai";
 const bb = greenBright;
 
 /**
@@ -24,8 +25,17 @@ export const getEnumKeys = <T>(e: T): string[] => {
 export function replaceAll(text: string, search: string, replace: string) {
     return text.split(search).join(replace);
 }
+
 export function dec2bin(dec) {
     return replaceAll((dec >>> 0).toString(2).padStart(8, "0"), "1", bb('1'));
+}
+
+export function checkHasFlags(token: string, flag: TokenFlags, flags: TokenFlags) {
+    const binExpected = dec2bin(flag);
+    const binActual = dec2bin(flags);
+    const bit = flag & flags;
+    if (process.env.MOCHA_DEBUG) console.log(`${token} has bit ${TokenFlags[flag].padEnd(20, ' ')}  (${binExpected} & ${(binActual)}): ${bit == flag}`)
+    expect(bit === flag, `Has`).to.be.true
 }
 
 export enum Colors1 {
