@@ -15,6 +15,13 @@ export const WORD_TOKEN_SPECs = [
         index: 0,
         length: 3
     },
+    {
+        description: "Tests a single letter.",
+        token: "a",
+        flags: [TokenFlags.Word],
+        index: 0,
+        length: 1
+    },
     {   
         description: "Tests a single word with an apostro'phe.",
         token: "she's",

@@ -21,21 +21,25 @@ export enum TokenFlags {
     Bracketed = 64,
     BracketedWord = Word | Bracketed,
     BracketedPhrase = Phrase | Bracketed,
-    Parenthesis = 128
+    Parenthesis = 128,
+    Period = 256,
+    Comma = 512
 }
 
 /**
  * Mapping of TokenFlags to it's associated RegEx.
  */
 const TokenFlagsRegExMap = [
-    { flags: TokenFlags.Word, pattern: `(?<Word>[\\w]+[']*[\\w]+)` },
+    { flags: TokenFlags.Word, pattern: `(?<Word>(?<!')(\\b\\S+\\b)(?!'))` }, //`(?<Word>[\\w']+)` }, // `(?<Word>[\\w]+[']*[\\w]+)` },
     { flags: TokenFlags.DoubleQuotedWord, pattern: `(?<DoubleQuotedWord>"[\\w']+")` },
     { flags: TokenFlags.SingleQuotedWord, pattern: `(?<SingleQuotedWord>'[\\w']+')` },
     { flags: TokenFlags.BracedWord, pattern: `(?<BracedWord>\\[[\\w']+\\])` },
     { flags: TokenFlags.BracketedWord, pattern: `(?<BracketedWord>{[\\w']+})` },
     { flags: TokenFlags.DoubleQuotedPhrase, pattern: `(?<DoubleQuotedPhrase>["].*["])` },
     { flags: TokenFlags.SingleQuotedPhrase, pattern: `(?<SingleQuotedPhrase>['].*['])` },
-    { flags: TokenFlags.Whitespace, pattern: `(?<Whitespace>[\\s]+)` }
+    { flags: TokenFlags.Whitespace, pattern: `(?<Whitespace>[\\s]+)` },
+    { flags: TokenFlags.Period, pattern: `(?<Period>\\.)` },
+    { flags: TokenFlags.Comma, pattern: `(?<Comma>\\,)` }
 ]
 
 /**
@@ -78,8 +82,9 @@ export type Parsed = {
  * @returns A parsed set of tokens.
  */
 const parse = (inputs: string): Parsed => {
-    let matches = TokenFlagsRegEx.exec(inputs);
     let results = [];
+    let matches = TokenFlagsRegEx.exec(inputs);
+
     
     // Break up input into "tokens"
     while (matches != null) {

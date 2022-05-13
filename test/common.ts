@@ -30,11 +30,11 @@ export function dec2bin(dec) {
     return replaceAll((dec >>> 0).toString(2).padStart(8, "0"), "1", bb('1'));
 }
 
-export function checkHasFlags(msg: string, token: string, flag: TokenFlags, flags: TokenFlags) {
+export function checkHasFlags(msg: string, token: string, flag: TokenFlags, flags: TokenFlags, log: Function) {
     const binExpected = dec2bin(flag);
     const binActual = dec2bin(flags);
     const bit = flag & flags;
-    if (process.env.MOCHA_DEBUG) console.log(`${token} has bit ${TokenFlags[flag].padEnd(20, ' ')}  (${binExpected} & ${(binActual)}): ${bit == flag}`)
+    if (process.env.MOCHA_DEBUG && log) log(`${token} has bit ${TokenFlags[flag].padEnd(20, ' ')}  (${binExpected} & ${(binActual)}): ${bit == flag}`)
     expect(bit === flag, msg).to.be.true
 }
 
