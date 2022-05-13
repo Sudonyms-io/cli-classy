@@ -1,5 +1,3 @@
-//const tokenizer = /(?<DoubleQuotedPhrase>["'].*["'])|(?<Whitespace>[\s]+)/gm
-
 /**
  * Set of flags that indicate characterisics of a parsed token.
  */
@@ -26,14 +24,23 @@ export enum TokenFlags {
     Parenthesis = 128
 }
 
+/**
+ * Mapping of TokenFlags to it's associated RegEx.
+ */
 const TokenFlagsRegExMap = [
     { flags: TokenFlags.Word, pattern: `(?<Word>[\\w]+[']*[\\w]+)` },
     { flags: TokenFlags.DoubleQuotedWord, pattern: `(?<DoubleQuotedWord>"[\\w']+")` },
     { flags: TokenFlags.SingleQuotedWord, pattern: `(?<SingleQuotedWord>'[\\w']+')` },
     { flags: TokenFlags.BracedWord, pattern: `(?<BracedWord>\\[[\\w']+\\])` },
-    { flags: TokenFlags.BracketedWord, pattern: `(?<BracketedWord>{[\\w']+})` }
+    { flags: TokenFlags.BracketedWord, pattern: `(?<BracketedWord>{[\\w']+})` },
+    { flags: TokenFlags.DoubleQuotedPhrase, pattern: `(?<DoubleQuotedPhrase>["].*["])` },
+    { flags: TokenFlags.SingleQuotedPhrase, pattern: `(?<SingleQuotedPhrase>['].*['])` },
+    { flags: TokenFlags.Whitespace, pattern: `(?<Whitespace>[\\s]+)` }
 ]
 
+/**
+ * The RegEx that will be used to parse the line of text into tokens.
+ */
 const TokenFlagsRegEx = new RegExp(TokenFlagsRegExMap.map((item) => {
     return item.pattern;
 }).join("|"), 'giy');
@@ -88,6 +95,10 @@ const parse = (inputs: string): Parsed => {
                 // Add additional flags
                 if ((flags & TokenFlags.Word) && (flags & TokenFlags.SingleQuoted || flags & TokenFlags.DoubleQuoted)) {
                     flags = TokenFlags.QuotedWord
+                }
+                // Add additional flags
+                if ((flags & TokenFlags.Phrase) && (flags & TokenFlags.SingleQuoted || flags & TokenFlags.DoubleQuoted)) {
+                    flags = TokenFlags.QuotedPhrase
                 }
                 results.push({
                     token: token,
