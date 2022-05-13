@@ -6,12 +6,32 @@ import { getEnumKeys, TokenSpec } from "./common";
 // }
 
 export const PHRASE_TOKEN_SPECs: TokenSpec[] = [
-    // {
-    //     description: "Tests a single phrase.",
-    //     token: "'dogs and cats'",
-    //     flags: TokenFlags.IsPhrase | TokenFlags.DoubleQuotedPhrase | TokenFlags.QuotedPhrase | TokenFlags.SingleQuotedPhrase,
-    //     flagNames: toStrings([TokenFlags.IsPhrase | TokenFlags.DoubleQuotedPhrase | TokenFlags.QuotedPhrase | TokenFlags.SingleQuotedPhrase]),
-    //     index: 0,
-    //     length: 15
-    // }
+    {
+        description: "Tests a single-quoted phrase.",
+        token: "'Cat and Dog'",
+        flags: [TokenFlags.Phrase, TokenFlags.Quoted, TokenFlags.QuotedPhrase, TokenFlags.SingleQuoted, TokenFlags.SingleQuotedPhrase],
+        index: 0,
+        length: 3
+    },
+    {
+        description: "Tests a single-quoted phrase with apostrophes.",
+        token: `'Dan's wife's hamster'`,
+        flags: [TokenFlags.Phrase, TokenFlags.Quoted, TokenFlags.QuotedPhrase, TokenFlags.DoubleQuoted, TokenFlags.DoubleQuotedPhrase],
+        index: 0,
+        length: 3
+    },
+    {
+        description: "Tests a double-quoted phrase.",
+        token: '"Cat and Dog"',
+        flags: [TokenFlags.Phrase, TokenFlags.Quoted, TokenFlags.QuotedPhrase, TokenFlags.DoubleQuoted, TokenFlags.DoubleQuotedPhrase],
+        index: 0,
+        length: 3
+    },
+    {
+        description: "Tests a double-quoted phrase with apostrophes.",
+        token: `"Dan's wife's hamster"`,
+        flags: [TokenFlags.Phrase, TokenFlags.Quoted, TokenFlags.QuotedPhrase, TokenFlags.DoubleQuoted, TokenFlags.DoubleQuotedPhrase],
+        index: 0,
+        length: 3
+    },
 ];
