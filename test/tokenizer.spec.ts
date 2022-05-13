@@ -42,7 +42,7 @@ describe(`Tests the tokenizer module`, function () {
 
             // Parsed token flags should match spec token flags
             expected.flags.forEach((flag) => {
-                checkHasFlags(actual.token, flag, actual.flags);
+                checkHasFlags(description, actual.token, flag, actual.flags);
             })
             //expect(actual, description).to.have.deep.equals(expected, description)
         })
@@ -61,7 +61,7 @@ describe(`Tests the tokenizer module`, function () {
 
             // Parsed token flags should match spec token flags
             expected.flags.forEach((flag) => {
-                checkHasFlags(actual.token, flag, actual.flags);
+                checkHasFlags(description, actual.token, flag, actual.flags);
             })
             //expect(actual, description).to.have.deep.equals(expected, description)
         })
