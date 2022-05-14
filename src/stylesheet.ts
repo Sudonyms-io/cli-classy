@@ -1,10 +1,7 @@
-// import * as colors from 'ansi-colors';
-
-import { StyleFunction } from "ansi-colors";
 import parse from "./parser";
 import { StyleDefinition, TokenFlags } from "./types";
 
-class Stylizer {
+class Stylesheet {
 
     private styles: StyleDefinition[] = []
 
@@ -15,9 +12,7 @@ class Stylizer {
     find(flags: TokenFlags): StyleDefinition {
         return this.styles.find((style) => {
             return style.flags & flags
-        })
-
-        //return (items.callback) ? items.callback : undefined
+        });
     };
 
     addStyle(flags: TokenFlags, callback: Function) {
@@ -40,22 +35,8 @@ class Stylizer {
 
             return items.join('')
         }
-
-
-
-        // this.foo();
-        // const s = this.styles;
-        // return parse(text).tokens.map((token) => {
-        //     const formatter = findFormatter(s, token.flags);
-        //     return (formatter) ? formatter(token.token) : token.token
-        // }).join('');
     }
 }
 
-function findFormatter(styles, flags: TokenFlags) {
-    return styles.find((style) => {
-        return style.flags & flags
-    }).callback;
-}
-
-export default Stylizer;
+export { TokenFlags };
+export default Stylesheet;

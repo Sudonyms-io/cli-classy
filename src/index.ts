@@ -1,3 +1,3 @@
-import Stylizer from './stylizer'
+import Stylesheet from './stylesheet'
 
-export default Stylizer;
+export default Stylesheet;

@@ -1,9 +1,8 @@
-import Stylizer from '../src/stylizer';
-import { TokenFlags } from '../src/types';
+import Stylesheet, { TokenFlags } from '../src/stylesheet';
 import * as c from 'ansi-colors'
 import { expect } from 'chai';
 
-describe(`Tests the stylizer module.`, function() {
+describe(`Tests the Stylesheet Module.`, function() {
 
     let logs = [];
     const log = (msg: any) => {
@@ -19,7 +18,7 @@ describe(`Tests the stylizer module.`, function() {
     });
 
     it(`Tests Stylizing Console Output`, function (done) {
-        const s = new Stylizer()
+        const s = new Stylesheet()
             .addStyle(TokenFlags.Braced, c.greenBright)
             .addStyle(TokenFlags.Bracketed, c.blueBright)
             .addStyle(TokenFlags.Punctuation, c.cyan)
@@ -42,5 +41,5 @@ describe(`Tests the stylizer module.`, function() {
         expect(msg2).includes(c.cyan(","));
 
         done();
-    })
-})
+    });
+});
