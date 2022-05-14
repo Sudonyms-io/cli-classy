@@ -4,14 +4,14 @@ import { WORD_TOKEN_SPECs } from './parser.words.helper';
 import { checkHasFlags } from './common';
 import { PHRASE_TOKEN_SPECs } from './parser.phrases.helper';
 
-console.log(`Tip: Set ENV variable DEBUG_MOCHA to true to enable detailed test output.`)
+//console.log(`Tip: Set ENV variable DEBUG_MOCHA to true to enable detailed test output.`)
 
 // Have some fun...
 const emoji = {
     fc: '🤞',  // Fingers crossed
 }
 
-describe(`Tests the parser module`, function () {
+describe(`Tests the parser module.`, function () {
 
     let logs = [];
     const log = (msg: any) => {
