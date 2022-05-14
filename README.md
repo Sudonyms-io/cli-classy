@@ -21,15 +21,15 @@ npm i @sudo-nymd/cli-stylesheet
 
 Import into your module:
 
-```
-import Stylizer from '../src/stylizer';
+``` javascript
+import Stylizer from '@sudo-nymd/cli-stylesheets';
 import { TokenFlags } from '../src/types';
 import * as colors from 'ansi-colors'
 ```
 
 Create a stylesheet.
 
-```
+``` javascript
 const stylesheet = new Stylizer()
     .addStyle(TokenFlags.Braced, colors.greenBright)
     .addStyle(TokenFlags.Bracketed, colors.blueBright)
@@ -40,7 +40,7 @@ const stylesheet = new Stylizer()
 
 Run your text (with tokens) through the stylesheet. ```Classé.```
 
-```
+``` javascript
 console.log(stylesheet("The quick [brown] fox jumped over the 'lazy dog', and the {cow} jumped over the moon! Enough said."));
 ```
 
