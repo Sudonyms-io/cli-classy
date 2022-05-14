@@ -27,5 +27,13 @@
   },
   "dependencies": {
     "ansi-colors": "^4.1.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sudo-nymd/cli-classy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sudo-nymd/cli-classy/issues"
+  },
+  "homepage": "https://github.com/sudo-nymd/cli-classy#readme"
 }
