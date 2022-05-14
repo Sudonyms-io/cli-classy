@@ -1,3 +1,4 @@
-import Stylesheet from './stylesheet'
+import Stylesheet, {TokenFlags} from './stylesheet'
 
+export { TokenFlags };
 export default Stylesheet;
