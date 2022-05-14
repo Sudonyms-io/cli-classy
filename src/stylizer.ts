@@ -1,19 +1,18 @@
 // import * as colors from 'ansi-colors';
 
 import { StyleFunction } from "ansi-colors";
-
 import parse from "./parser";
-import { Stylesheet, TokenFlags } from "./types";
+import { StyleDefinition, TokenFlags } from "./types";
 
 class Stylizer {
 
-    private styles: Stylesheet[] = []
+    private styles: StyleDefinition[] = []
 
     constructor() {
         this.styles = [];
     }
 
-    find(flags: TokenFlags): Stylesheet {
+    find(flags: TokenFlags): StyleDefinition {
         return this.styles.find((style) => {
             return style.flags & flags
         })
