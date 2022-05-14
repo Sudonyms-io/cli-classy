@@ -1,10 +1,9 @@
 import Stylizer from '../src/stylizer';
-import { TokenFlags } from '../src/tokenizer';
+import { TokenFlags } from '../src/parser';
 import * as c from 'ansi-colors'
-import { Logger } from './common';
 import { expect } from 'chai';
 
-describe.only(`Stylizer`, function() {
+describe(`Stylizer`, function() {
 
     let logs = [];
     const log = (msg: any) => {

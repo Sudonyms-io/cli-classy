@@ -1,4 +1,4 @@
-import { TokenFlags } from './tokenizer';
+import { TokenFlags } from './parser';
 import { StyleFunction } from 'ansi-colors'
 
 export interface StyleSheet {

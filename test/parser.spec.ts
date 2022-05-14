@@ -1,8 +1,8 @@
 import { expect } from 'chai';
-import parse,{ TokenFlags } from '../src/tokenizer';
-import { WORD_TOKEN_SPECs } from './tokenizer.words.helper';
-import { checkHasFlags, dec2bin} from './common';
-import { PHRASE_TOKEN_SPECs } from './tokenizer.phrases.helper';
+import parse,{ TokenFlags } from '../src/parser';
+import { WORD_TOKEN_SPECs } from './parser.words.helper';
+import { checkHasFlags } from './common';
+import { PHRASE_TOKEN_SPECs } from './parser.phrases.helper';
 
 console.log(`Tip: Set ENV variable DEBUG_MOCHA to true to enable detailed test output.`)
 
@@ -11,7 +11,7 @@ const emoji = {
     fc: '🤞',  // Fingers crossed
 }
 
-describe(`Tests the tokenizer module`, function () {
+describe(`Tests the parser module`, function () {
 
     let logs = [];
     const log = (msg: any) => {

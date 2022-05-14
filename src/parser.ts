@@ -54,7 +54,7 @@ const TokenFlagsRegEx = new RegExp(TokenFlagsRegExMap.map((item) => {
     return item.pattern;
 }).join("|"), 'giy');
 
-if (process.env.DEBUG || process.env.MOCHA_DEBUG) console.log(`RegExp: ${TokenFlagsRegEx}`);
+//if (process.env.DEBUG || process.env.MOCHA_DEBUG) console.log(`RegExp: ${TokenFlagsRegEx}`);
 
 /**
  * Represents a parsed token.

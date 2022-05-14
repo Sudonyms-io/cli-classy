@@ -3,7 +3,7 @@
 import { StyleFunction } from "ansi-colors";
 import { timeStamp } from "console";
 import { StyleSheet } from "./stylesheet";
-import parse, { TokenFlags } from "./tokenizer";
+import parse, { TokenFlags } from "./parser";
 
 // type StyleBase = {
 //     name: string;

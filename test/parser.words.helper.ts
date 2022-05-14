@@ -1,4 +1,4 @@
-import { TokenFlags } from "../src/tokenizer";
+import { TokenFlags } from "../src/parser";
 import { TokenSpec } from "./common";
 
 const getTokenNames = (flags: TokenFlags[]) => {

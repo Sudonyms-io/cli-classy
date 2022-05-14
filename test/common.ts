@@ -1,6 +1,8 @@
-import { TokenFlags } from "../src/tokenizer";
-import { blueBright, greenBright} from 'ansi-colors';
+import { TokenFlags } from "../src/parser";
+import { blueBright, greenBright, dim } from 'ansi-colors';
 import { expect } from "chai";
+import { join } from "path";
+import { assert } from "console";
 const bb = greenBright;
 
 /**
@@ -27,32 +29,38 @@ export function replaceAll(text: string, search: string, replace: string) {
 }
 
 export function dec2bin(dec) {
-    return replaceAll((dec >>> 0).toString(2).padStart(8, "0"), "1", bb('1'));
+    //return replaceAll((dec >>> 0).toString(2).padStart(8, "0"), "1", bb('1'));
+    return (dec >>> 0).toString(2).padStart(8, "0"); 
 }
 
 export function checkHasFlags(msg: string, token: string, flag: TokenFlags, flags: TokenFlags, log: Function) {
     const binExpected = dec2bin(flag);
     const binActual = dec2bin(flags);
     const bit = flag & flags;
-    if (process.env.MOCHA_DEBUG && log) log(`${token} has bit ${TokenFlags[flag].padEnd(20, ' ')}  (${binExpected} & ${(binActual)}): ${bit == flag}`)
+    //if (process.env.MOCHA_DEBUG && log) log(`${token} has bit ${TokenFlags[flag].padEnd(20, ' ')}  (${binExpected} & ${(binActual)}): ${bit == flag}`)
+    if (process.env.MOCHA_DEBUG && log) printFlagComparison(`${token} has bit ${TokenFlags[flag].padEnd(20, ' ')}`, flag, flags, log)
     expect(bit === flag, msg).to.be.true
 }
-export class Logger {
 
-    constructor() {
-        this.buffer = [];
-    }
+export const printFlagComparison = (msg: string, flag: TokenFlags, flags: TokenFlags, log: Function)  => {
+    const bFlag = dec2bin(flag);
+    const bFlags = dec2bin(flags);
+    const hasBits = (flag & flags) == flag;
 
-    private buffer: string[] = [];
+    const as: string[] = [];
+    const bs: string[] =[];
 
-    log(msg: any) {
-        this.buffer.push(msg);
-    }
-
-    flush() {
-        while(this.buffer.length) {
-            console.log(this.buffer.shift());
+    for (let i = 0; i <= bFlag.length; i++) {
+        const a = bFlag[i];
+        const b = bFlags[i];
+        if (a === b && a === '1') {
+            as.push(greenBright.bold(a));
+            bs.push(greenBright.bold(b));
+        } else {
+            as.push(dim(a));
+            bs.push(dim(b));
         }
     }
-}
 
+    log(`${msg} ${as.join('')} & ${bs.join('')} = ${hasBits}`)
+}
