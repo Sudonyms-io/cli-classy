@@ -1,5 +1,5 @@
 ![Sudo-Nymd](https://github.com/sudo-nymd/branding/blob/main/images/banner.png?raw=true)
-# cli-stylesheets
+# Stylesheets for your CLI!
 
 ## Before (The Déclassé Way)
 
@@ -43,4 +43,11 @@ Run your text (with tokens) through the stylesheet. ```Classé.```
 ```
 console.log(stylesheet("The quick [brown] fox jumped over the 'lazy dog', and the {cow} jumped over the moon! Enough said."));
 ```
+
+# How it Works
+
+Not yet. 
+# Extending with Your Own Style Functions
+
+Not yet.
 
