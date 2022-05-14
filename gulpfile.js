@@ -19,6 +19,10 @@ const COMMAND_CONFIG = {
         command: './node_modules/.bin/mocha',
         args: ['--config', './test/.mocharc.json']
     },
+    COVERAGE: {
+        command: './node_modules/.bin/nyc',
+        args: ['gulp', 'test']
+    },
     COMPILE: {
         command: './node_modules/.bin/tsc',
         paths: tscConfig.include
@@ -34,6 +38,15 @@ const __clean = (done) => {
 }
 __clean.description = `Cleans the project output directories at ${f_args(COMMAND_CONFIG.CLEAN.paths)}.`
 exports.clean = __clean;
+
+const _coverage = (done) => {
+    const { SPAWN: OPTIONS, COVERAGE: { command, args }} = COMMAND_CONFIG
+
+    const result = spawn(command, args, OPTIONS);
+    done();
+}
+_coverage.description = `Runs code coverage (${f_cmd(COMMAND_CONFIG.COVERAGE.command)}) over the (${f_cmd(COMMAND_CONFIG.TEST.command)}) test outputs.`
+exports.coverage = _coverage;
 
 const __compile = (done) => {
     const { SPAWN: OPTIONS, COMPILE: { command } } = COMMAND_CONFIG;
