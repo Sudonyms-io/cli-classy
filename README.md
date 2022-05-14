@@ -25,7 +25,9 @@ If using ```TypeScript```, use the following ```import``` statements at the top 
 
 ``` javascript
 import { Stylesheet, TokenFlags } from 'cli-classy';
-import * as colors from 'ansi-colors' // Use your preferred color lib
+
+// Pull style functions from your preferred color lib
+import * as colors from 'ansi-colors';
 ```
 
 If using ```JavaScript```, use the following ```require``` statements at the top of your ```*.js*``` file:
