@@ -1,5 +1,5 @@
-import { TokenFlags } from "../src/parser";
-import { TokenSpec } from "./common";
+
+import { TokenFlags } from "../src/types";
 
 const getTokenNames = (flags: TokenFlags[]) => {
     return flags.map((flag) => {

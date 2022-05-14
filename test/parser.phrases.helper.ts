@@ -1,4 +1,4 @@
-import { TokenFlags } from "../src/parser";
+import { TokenFlags } from "../src/types";
 import { getEnumKeys, TokenSpec } from "./common";
 
 // const toStrings = (items: typeof TokenFlags[]) => {

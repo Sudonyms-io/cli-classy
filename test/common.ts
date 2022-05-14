@@ -1,8 +1,6 @@
-import { TokenFlags } from "../src/parser";
-import { blueBright, greenBright, dim } from 'ansi-colors';
+import { TokenFlags } from "../src/types";
+import { greenBright, dim } from 'ansi-colors';
 import { expect } from "chai";
-import { join } from "path";
-import { assert } from "console";
 const bb = greenBright;
 
 /**

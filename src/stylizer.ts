@@ -3,7 +3,8 @@
 import { StyleFunction } from "ansi-colors";
 import { timeStamp } from "console";
 import { StyleSheet } from "./stylesheet";
-import parse, { TokenFlags } from "./parser";
+import parse from "./parser";
+import { Stylesheet, TokenFlags } from "./types";
 
 // type StyleBase = {
 //     name: string;
@@ -98,19 +99,17 @@ import parse, { TokenFlags } from "./parser";
 
 // export default Stylizer;
 
-type TokenFlagsStyleMap = {
-    flags: TokenFlags,
-    callback: Function
-}
+
+
 class Stylizer {
 
-    private styles: TokenFlagsStyleMap[] = []
+    private styles: Stylesheet[] = []
 
     constructor() {
         this.styles = [];
     }
 
-    find(flags: TokenFlags): TokenFlagsStyleMap {
+    find(flags: TokenFlags): Stylesheet {
         return this.styles.find((style) => {
             return style.flags & flags
         })
@@ -119,7 +118,7 @@ class Stylizer {
     };
 
     addStyle(flags: TokenFlags, callback: Function) {
-        this.styles.push({ flags: flags, callback: callback });
+        this.styles.push({ flags: flags, style: callback });
         return this;
     }
 
@@ -130,7 +129,7 @@ class Stylizer {
             const items = parse(text).tokens.map((token) => {
                 const map = _self.find(token.flags);
                 if (map !== undefined) {
-                    return map.callback(token.token);
+                    return map.style(token.token);
                 } else {
                     return token.token
                 }

@@ -1,8 +1,9 @@
 import { expect } from 'chai';
-import parse,{ TokenFlags } from '../src/parser';
+import parse from '../src/parser';
 import { WORD_TOKEN_SPECs } from './parser.words.helper';
 import { checkHasFlags } from './common';
 import { PHRASE_TOKEN_SPECs } from './parser.phrases.helper';
+import { TokenFlags } from '../src/types';
 
 //console.log(`Tip: Set ENV variable DEBUG_MOCHA to true to enable detailed test output.`)
 

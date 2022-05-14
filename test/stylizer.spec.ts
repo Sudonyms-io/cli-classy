@@ -1,5 +1,5 @@
 import Stylizer from '../src/stylizer';
-import { TokenFlags } from '../src/parser';
+import { TokenFlags } from '../src/types';
 import * as c from 'ansi-colors'
 import { expect } from 'chai';
 
