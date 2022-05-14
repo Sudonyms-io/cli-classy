@@ -17,9 +17,7 @@ describe(`Tests the tokenizer module`, function () {
     const log = (msg: any) => {
         logs.push(`\t${msg}`)
     }
-    beforeEach(() => {
-
-    });
+    
     afterEach(() => {
         if (process.env.DEBUG_MOCHA || process.env.MOCHA_DEBUG) {
             while (logs.length > 0) {

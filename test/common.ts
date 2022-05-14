@@ -37,17 +37,22 @@ export function checkHasFlags(msg: string, token: string, flag: TokenFlags, flag
     if (process.env.MOCHA_DEBUG && log) log(`${token} has bit ${TokenFlags[flag].padEnd(20, ' ')}  (${binExpected} & ${(binActual)}): ${bit == flag}`)
     expect(bit === flag, msg).to.be.true
 }
+export class Logger {
 
-export enum Colors1 {
-    Red = 1 << 0,
-    Blue,
-    Yellow
+    constructor() {
+        this.buffer = [];
+    }
+
+    private buffer: string[] = [];
+
+    log(msg: any) {
+        this.buffer.push(msg);
+    }
+
+    flush() {
+        while(this.buffer.length) {
+            console.log(this.buffer.shift());
+        }
+    }
 }
 
-export enum Colors2 {
-    Orange = 1 << 3,
-    Green,
-    Purple
-}
-
-export const Colors = { ...Colors1, ...Colors2 };
