@@ -23,7 +23,9 @@ export enum TokenFlags {
     BracketedPhrase = Phrase | Bracketed,
     Parenthesis = 128,
     Period = 256,
-    Comma = 512
+    Comma = 512,
+    Exclamation = 1024,
+    Punctuation = Period | Comma | Exclamation
 }
 
 /**
@@ -36,10 +38,13 @@ const TokenFlagsRegExMap = [
     { flags: TokenFlags.BracedWord, pattern: `(?<BracedWord>\\[[\\w']+\\])` },
     { flags: TokenFlags.BracketedWord, pattern: `(?<BracketedWord>{[\\w']+})` },
     { flags: TokenFlags.DoubleQuotedPhrase, pattern: `(?<DoubleQuotedPhrase>["].*["])` },
+    { flags: TokenFlags.BracedPhrase, pattern: `(?<BracedPhrased>[\\[]].*[\\]])` },
+    { flags: TokenFlags.BracketedPhrase, pattern: `(?<BracketedPhrase>[{].*[}])` },
     { flags: TokenFlags.SingleQuotedPhrase, pattern: `(?<SingleQuotedPhrase>['].*['])` },
     { flags: TokenFlags.Whitespace, pattern: `(?<Whitespace>[\\s]+)` },
     { flags: TokenFlags.Period, pattern: `(?<Period>\\.)` },
-    { flags: TokenFlags.Comma, pattern: `(?<Comma>\\,)` }
+    { flags: TokenFlags.Comma, pattern: `(?<Comma>\\,)` },
+    { flags: TokenFlags.Exclamation, pattern: `(?<Exclamation>!)` },
 ]
 
 /**
@@ -84,7 +89,6 @@ export type Parsed = {
 const parse = (inputs: string): Parsed => {
     let results = [];
     let matches = TokenFlagsRegEx.exec(inputs);
-
     
     // Break up input into "tokens"
     while (matches != null) {
@@ -99,11 +103,14 @@ const parse = (inputs: string): Parsed => {
                 
                 // Add additional flags
                 if ((flags & TokenFlags.Word) && (flags & TokenFlags.SingleQuoted || flags & TokenFlags.DoubleQuoted)) {
-                    flags = TokenFlags.QuotedWord
+                    flags = TokenFlags.QuotedWord;
                 }
                 // Add additional flags
                 if ((flags & TokenFlags.Phrase) && (flags & TokenFlags.SingleQuoted || flags & TokenFlags.DoubleQuoted)) {
-                    flags = TokenFlags.QuotedPhrase
+                    flags = TokenFlags.QuotedPhrase;
+                }
+                if ((flags & TokenFlags.Exclamation) && (flags & TokenFlags.Comma || flags & TokenFlags.Period)) {
+                    flags = TokenFlags.Punctuation;
                 }
                 results.push({
                     token: token,
