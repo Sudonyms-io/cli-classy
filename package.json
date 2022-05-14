@@ -1,7 +1,7 @@
 {
   "name": "@sudo-nymd/cli-classy",
   "version": "0.9.1",
-  "description": "Add color and style to your console output the easy way.",
+  "description": "Add color and style to your console output the classy way.",
   "main": "lib/index.js",
   "scripts": {
     "test": "nyc gulp test"
