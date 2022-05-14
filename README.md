@@ -58,6 +58,8 @@ Run your text (with tokens) through the stylesheet. ```Classé.```
 console.log(ss("The quick [brown] fox jumped over the 'lazy dog', and the {cow} jumped over the moon! Enough said."));
 ```
 
+![After](https://github.com/sudo-nymd/cli-stylesheets/blob/master/images/after-small.png?raw=true)
+
 # How it Works
 
 Not yet, but coming soon.
