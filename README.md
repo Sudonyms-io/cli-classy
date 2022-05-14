@@ -1,5 +1,5 @@
 ![Sudo-Nymd](https://github.com/sudo-nymd/branding/blob/main/images/banner.png?raw=true)
-# Stylesheets for your CLI!
+# CLI Classé.
 
 ## Before (The Déclassé Way)
 
@@ -7,7 +7,7 @@ You've styled out your terminal -- ```bravo, by the way```. While coding, your c
 
 ![Before](https://github.com/sudo-nymd/cli-stylesheets/blob/master/images/before.png?raw=true)
 
-## After (Très Classé!)
+## After (Nouveau... Très Classé!)
 
 ![After](https://github.com/sudo-nymd/cli-stylesheets/blob/master/images/after.png?raw=true)
 
@@ -16,21 +16,20 @@ You've styled out your terminal -- ```bravo, by the way```. While coding, your c
 Add library to your project:
 
 ```
-npm i @sudo-nymd/cli-stylesheet
+npm i @sudo-nymd/cli-classy
 ```
 
 Import into your module:
 
 ``` javascript
-import Stylizer from '@sudo-nymd/cli-stylesheets';
-import { TokenFlags } from '../src/types';
-import * as colors from 'ansi-colors'
+import Stylesheet, { TokenFlags } from '@sudo-nymd/cli-classy';
+import * as colors from 'ansi-colors' // Use your preferred color lib
 ```
 
 Create a stylesheet.
 
 ``` javascript
-const stylesheet = new Stylizer()
+const stylesheet = new Stylesheet()
     .addStyle(TokenFlags.Braced, colors.greenBright)
     .addStyle(TokenFlags.Bracketed, colors.blueBright)
     .addStyle(TokenFlags.Punctuation, colors.cyan)
