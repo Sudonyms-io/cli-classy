@@ -11,22 +11,33 @@ You've styled out your terminal -- ```bravo, by the way```. While coding, your c
 
 ![After](https://github.com/sudo-nymd/cli-stylesheets/blob/master/images/after.png?raw=true)
 
-# Paths to Terminal Style 
+# Path to Terminal Style and Eternal Classiness
 
-Add library to your project:
+### Add library to your Project
 
 ``` bash
 npm i cli-classy
 ``` 
 
-Import into your module:
+### Import Into Your Module
+
+If using ```TypeScript```, use the following ```import``` statements at the top of your ```*.ts*``` file:
 
 ``` javascript
-import Stylesheet, { TokenFlags } from 'cli-classy';
+import { Stylesheet, TokenFlags } from 'cli-classy';
 import * as colors from 'ansi-colors' // Use your preferred color lib
 ```
 
-Create a stylesheet.
+If using ```JavaScript```, use the following ```require``` statements at the top of your ```*.js*``` file:
+
+``` javascript
+const { Stylesheet, TokenFlags } = require('cli-classy');
+
+// Pull style functions from your preferred color lib
+const colors = require('ansi-colors');
+```
+
+### Create a stylesheet.
 
 ``` javascript
 const stylesheet = new Stylesheet()
@@ -35,18 +46,20 @@ const stylesheet = new Stylesheet()
     .addStyle(TokenFlags.Punctuation, colors.cyan)
     .addStyle(TokenFlags.Quoted, colors.bgCyanBright.blue)
     .stylize();
+
+const ss = stylesheet; // Alias for shorter code
 ```
 
 Run your text (with tokens) through the stylesheet. ```Classé.```
 
 ``` javascript
-console.log(stylesheet("The quick [brown] fox jumped over the 'lazy dog', and the {cow} jumped over the moon! Enough said."));
+console.log(ss("The quick [brown] fox jumped over the 'lazy dog', and the {cow} jumped over the moon! Enough said."));
 ```
 
 # How it Works
 
-Not yet. 
+Not yet, but coming soon.
 # Extending with Your Own Style Functions
 
-Not yet.
+Not yet, but coming soon.
 
