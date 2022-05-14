@@ -15,14 +15,14 @@ You've styled out your terminal -- ```bravo, by the way```. While coding, your c
 
 Add library to your project:
 
-```
-npm i @sudo-nymd/cli-classy
-```
+``` bash
+npm i cli-classy
+``` 
 
 Import into your module:
 
 ``` javascript
-import Stylesheet, { TokenFlags } from '@sudo-nymd/cli-classy';
+import Stylesheet, { TokenFlags } from 'cli-classy';
 import * as colors from 'ansi-colors' // Use your preferred color lib
 ```
 
