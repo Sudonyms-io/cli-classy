@@ -12,7 +12,9 @@ const f_cmd = (value) => greenBright(path.basename(value));
 const COMMAND_CONFIG = {
     CLEAN: {
         paths: [
-            tscConfig.compilerOptions.outDir
+            tscConfig.compilerOptions.outDir,
+            ".nyc_output",
+            "coverage"
         ]
     },
     TEST: {
