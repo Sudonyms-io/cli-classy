@@ -1,6 +1,6 @@
 {
   "name": "cli-classy",
-  "version": "0.9.6",
+  "version": "0.9.7",
   "description": "Add color and style to your console output the classy way.",
   "main": "lib/index.js",
   "files": [
