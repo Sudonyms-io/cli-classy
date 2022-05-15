@@ -1,7 +1,7 @@
 ![Sudo-Nymd](https://github.com/sudo-nymd/branding/blob/main/images/banner.png?raw=true)
 # Stylish CLI. Classy.
 
-Add color and style -- the ```classy``` way.
+Add color and style to your console output -- the ```classy``` way.
 
 ## Before (The Déclassé Way)
 
