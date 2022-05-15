@@ -7,19 +7,19 @@ You've styled out your terminal -- ```bravo, by the way```. While coding, your c
 
 ![Before](https://github.com/sudo-nymd/cli-stylesheets/blob/master/images/before.png?raw=true)
 
-## After (Nouveau... Très Classé!)
+## After (The New, Classy Way)
 
 ![After](https://github.com/sudo-nymd/cli-stylesheets/blob/master/images/after.png?raw=true)
 
 # Path to Terminal Style and Eternal Classiness
 
-### Add library to your Project
+### 1. Add ```cli-classy``` library to your project.
 
 ``` bash
 npm i cli-classy
 ``` 
 
-### Import Into Your Module
+### 2. Import ```cli-classy``` into your module.
 
 If using ```TypeScript```, use the following ```import``` statements at the top of your ```*.ts*``` file:
 
@@ -39,7 +39,7 @@ const { Stylesheet, TokenFlags } = require('cli-classy');
 const colors = require('ansi-colors');
 ```
 
-### Create a stylesheet.
+### 3. Create a stylesheet. ```Getting Classier```
 
 ``` javascript
 const stylesheet = new Stylesheet()
@@ -52,11 +52,13 @@ const stylesheet = new Stylesheet()
 const ss = stylesheet; // Alias for shorter code
 ```
 
-Run your text (with tokens) through the stylesheet. ```Classé.```
+### 4. Run your text (with tokens) through the stylesheet. ```Classé.```
 
 ``` javascript
 console.log(ss("The quick [brown] fox jumped over the 'lazy dog', and the {cow} jumped over the moon! Enough said."));
 ```
+
+### 5. Bask in the glow of colorful console output... the easy (and, ```cli-classy```!) way.
 
 ![After](https://github.com/sudo-nymd/cli-stylesheets/blob/master/images/after-small.png?raw=true)
 
