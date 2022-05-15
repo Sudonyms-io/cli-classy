@@ -1,4 +1,4 @@
-![Sudo-Nymd](https://github.com/sudo-nymd/branding/blob/main/images/cli-classy.png?raw=true)
+![Sudo-Nymd](https://raw.githubusercontent.com/sudo-nymd/cli-classy/master/images/cli-classy.png)
 # Stylish CLI. Classy.
 
 Add color and style to your console output -- the ```classy``` way.
