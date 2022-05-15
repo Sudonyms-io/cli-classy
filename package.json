@@ -4,7 +4,7 @@
   "description": "Add color and style to your console output the classy way.",
   "main": "lib/index.js",
   "files": [
-    "./lib/**/*.*"
+    "./lib"
   ],
   "scripts": {
     "test": "nyc gulp test"
