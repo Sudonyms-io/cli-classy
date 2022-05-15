@@ -1,26 +1,38 @@
 import parse from "./parser";
 import { StyleDefinition, TokenFlags } from "./types";
 
+/**
+ * A class for representing a stylesheet for a CLI.
+ */
 class Stylesheet {
 
     private styles: StyleDefinition[] = []
 
+    /**
+     * Initializes a new Stylesheet class.
+     */
     constructor() {
         this.styles = [];
     }
 
-    find(flags: TokenFlags): StyleDefinition {
+    private find(flags: TokenFlags): StyleDefinition {
         return this.styles.find((style) => {
             return style.flags & flags
         });
     };
 
-    addStyle(flags: TokenFlags, callback: Function) {
+    /**
+     * Adds a @type (StyleDefinition) to the stylesheet.
+     * @param flags The flags to be matched.
+     * @param callback The StyleFunction to be called.
+     * @returns A reference.
+     */
+    public addStyle(flags: TokenFlags, callback: Function) {
         this.styles.push({ flags: flags, style: callback });
         return this;
     }
 
-    stylize() {
+    public stylize() {
         let _self = this;
         
         return function (text) {

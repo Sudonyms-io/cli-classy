@@ -1,5 +1,5 @@
 const del = require('del');
-const spawn = require("cross-spawn");
+const spawn = require("cross-spawn").sync;
 const { series } = require('gulp');
 const tscConfig = require('./tsconfig.json');
 const { magentaBright, blueBright, greenBright } = require('ansi-colors');
@@ -21,6 +21,9 @@ const COMMAND_CONFIG = {
         command: './node_modules/.bin/mocha',
         args: ['--config', './test/.mocharc.json']
     },
+    BUNDLE: {
+        command: 'webpack-cli'
+    },
     COVERAGE: {
         command: './node_modules/.bin/nyc',
         args: ['gulp', 'test']
@@ -34,6 +37,14 @@ const COMMAND_CONFIG = {
     }
 }
 
+const __bundle = (done) => {
+    const { SPAWN: OPTIONS, BUNDLE: { command } } = COMMAND_CONFIG
+    const result = spawn(command, OPTIONS);
+    done();
+}
+__bundle.description = `Bundles (using ${f_cmd(COMMAND_CONFIG.BUNDLE.command)}) the build output at ${f_args(COMMAND_CONFIG.COMPILE.paths) } and drops the bundle at ${f_args("./lib")}.`
+exports.bundle = __bundle;
+
 const __clean = (done) => {
     const { paths } = COMMAND_CONFIG.CLEAN;
     return del(paths);
@@ -41,14 +52,13 @@ const __clean = (done) => {
 __clean.description = `Cleans the project output directories at ${f_args(COMMAND_CONFIG.CLEAN.paths)}.`
 exports.clean = __clean;
 
-const _coverage = (done) => {
-    const { SPAWN: OPTIONS, COVERAGE: { command, args }} = COMMAND_CONFIG
-
+const __coverage = (done) => {
+    const { SPAWN: OPTIONS, COVERAGE: { command, args }} = COMMAND_CONFIG;
     const result = spawn(command, args, OPTIONS);
     done();
 }
-_coverage.description = `Runs code coverage (${f_cmd(COMMAND_CONFIG.COVERAGE.command)}) over the (${f_cmd(COMMAND_CONFIG.TEST.command)}) test outputs.`
-exports.coverage = _coverage;
+__coverage.description = `Runs code coverage (${f_cmd(COMMAND_CONFIG.COVERAGE.command)}) over the (${f_cmd(COMMAND_CONFIG.TEST.command)}) test outputs.`
+exports.coverage = __coverage;
 
 const __compile = (done) => {
     const { SPAWN: OPTIONS, COMPILE: { command } } = COMMAND_CONFIG;
@@ -66,6 +76,6 @@ const __test = (done) => {
 __test.description = `Runs test program ${f_cmd(COMMAND_CONFIG.TEST.command)} ${f_args(COMMAND_CONFIG.TEST.args)}.`
 exports.test = __test;
 
-const __build = series([__clean, __compile]);
+const __build = series([__clean, __compile, __bundle]);
 __build.description = `Cleans and compiles the project.`
 exports.build = __build;

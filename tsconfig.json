@@ -5,8 +5,9 @@
         "target": "ES2016",
         "esModuleInterop": true,
         "sourceMap": true,
-        "outDir": "./lib",
-        "declaration": true
+        "outDir": "./build",
+        "declaration": true,
+        "declarationDir": "./lib"
         
     }, "include": ["./src"], "exclude": ["test/**/*.spec.ts"]
 }
