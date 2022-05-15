@@ -1,5 +1,7 @@
 ![Sudo-Nymd](https://github.com/sudo-nymd/branding/blob/main/images/banner.png?raw=true)
-# CLI Classé.
+# CLI Classy.
+
+You're trying too hard to add colors to your console output, and that's just not ```classy```. Add color and style -- the ```classy``` way.
 
 ## Before (The Déclassé Way)
 
