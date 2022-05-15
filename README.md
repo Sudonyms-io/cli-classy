@@ -1,13 +1,13 @@
 ![Sudo-Nymd](https://github.com/sudo-nymd/branding/blob/main/images/banner.png?raw=true)
-# CLI Classy.
+# Stylish CLI. Classy.
 
-You're trying too hard to add colors to your console output, and that's just not ```classy```. Add color and style -- the ```classy``` way.
+Add color and style -- the ```classy``` way.
 
 ## Before (The Déclassé Way)
 
 You've styled out your terminal -- ```bravo, by the way```. While coding, you notice your console output looks underdressed... No style... ```déclassé```! 
 
-You import your favorite ```colors``` library and begin bending over backward with string interpolation and now your console code is a twisted, spaghetti mess... 
+You import your favorite ```colors``` library and begin bending over backward with string interpolation, and now your console code is a twisted, spaghetti mess... 
 
 You're trying ```too hard``` and that's ```just not classy```.
 
