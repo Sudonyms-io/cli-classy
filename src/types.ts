@@ -1,4 +1,4 @@
-import * as colors from 'ansi-colors';
+//import * as colors from 'ansi-colors';
 
 export type StyleDefinition = {
     flags: TokenFlags,
@@ -36,4 +36,4 @@ export enum TokenFlags {
     Punctuation = Period | Comma | Exclamation
 }
 
-export { colors }
+//export { colors }
