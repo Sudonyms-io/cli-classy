@@ -1,8 +1,39 @@
-//import * as colors from 'ansi-colors';
+/**
+ * Represents a parsed token.
+ */
+export type Token = {
+    /** The parsed text value for the token. */
+    value: string;
+    /** Any identified TokenFlags for the token. */
+    flags: TokenFlags;
+    /** The position of the token within the line of input that was parsed. */
+    index: number;
+    /** The length of the tokens value. */
+    length: number;
+}
 
+/**
+ * Represents the return structure of the parse operation.
+ */
+export type Parsed = {
+    /** The line of input that was parsed. */
+    input: string;
+
+    /** The set of parsed text tokens. */
+    tokens: Token[];
+}
+
+/**
+ * A callback function, which applies a style to a token.
+ */
+export type StyleFunction = (text: string, token?: Token) => string;
+
+/**
+ * A style definition, which maps TokenFlags to a StyleFunction.
+ */
 export type StyleDefinition = {
     flags: TokenFlags,
-    style: Function,
+    stylize: StyleFunction,
     clearTokens?: boolean;
 }
 
@@ -36,4 +67,3 @@ export enum TokenFlags {
     Punctuation = Period | Comma | Exclamation
 }
 
-//export { colors }

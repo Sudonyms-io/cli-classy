@@ -1,4 +1,9 @@
-import { TokenFlags } from "./types";
+import {
+    Parsed,
+    StyleDefinition,
+    StyleFunction,
+    TokenFlags
+    } from './types';
 /**
  * Mapping of TokenFlags to it's associated RegEx.
  */
@@ -28,31 +33,6 @@ const TokenFlagsRegEx = new RegExp(TokenFlagsRegExMap.map((item) => {
 //if (process.env.DEBUG || process.env.MOCHA_DEBUG) console.log(`RegExp: ${TokenFlagsRegEx}`);
 
 /**
- * Represents a parsed token.
- */
-export type Token = {
-    value: string;
-    flags: TokenFlags;
-    index: number;
-    length: number;
-}
-
-/**
- * Represents the return structure of the parse operation.
- */
-export type Parsed = {
-    /**
-     * The line of input that was parsed.
-     */
-    input: string;
-
-    /**
-     * The set of parsed tokens.
-     */
-    tokens: Token[];
-}
-
-/**
  * Parses the input text into a set of tokens with flags that indicate the type of token.
  * @param inputs A line of text to parse.
  * @returns A parsed set of tokens.
@@ -64,6 +44,7 @@ const parse = (inputs: string): Parsed => {
     // Break up input into "tokens"
     while (matches != null) {
         const groups = matches.groups;
+        
         for (const group in groups) {
             // Get the named group - if it matched
             const token = groups[group];
