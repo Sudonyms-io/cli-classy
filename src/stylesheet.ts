@@ -27,9 +27,9 @@ class Stylesheet {
             const items = parse(text).tokens.map((token) => {
                 const map = _self.find(token.flags);
                 if (map !== undefined) {
-                    return map.style(token.token);
+                    return map.style(token.value);
                 } else {
-                    return token.token
+                    return token.value
                 }
             });
 

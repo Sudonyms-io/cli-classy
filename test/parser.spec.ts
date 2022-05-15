@@ -34,25 +34,25 @@ describe(`Tests the parser module.`, function () {
                 inputs: "A test.",
                 tokens: [
                     {
-                        token: "A",
+                        value: "A",
                         flags: TokenFlags.Word,
                         index: 0,
                         length: 1
                     },
                     {
-                        token: " ",
+                        value: " ",
                         flags: TokenFlags.Whitespace,
                         index: 1,
                         length: 1
                     },
                     {
-                        token: "test",
+                        value: "test",
                         flags: TokenFlags.Word,
                         index: 2,
                         length: 4
                     },
                     {
-                        token: ".",
+                        value: ".",
                         flags: TokenFlags.Period,
                         index: 6,
                         length: 1
@@ -64,43 +64,43 @@ describe(`Tests the parser module.`, function () {
                 inputs: "And then, nothing.",
                 tokens: [
                     {
-                        token: "And",
+                        value: "And",
                         flags: TokenFlags.Word,
                         index: 0,
                         length: 3
                     },
                     {
-                        token: " ",
+                        value: " ",
                         flags: TokenFlags.Whitespace,
                         index: 3,
                         length: 1
                     },
                     {
-                        token: "then",
+                        value: "then",
                         flags: TokenFlags.Word,
                         index: 4,
                         length: 4
                     },
                     {
-                        token: ",",
+                        value: ",",
                         flags: TokenFlags.Comma,
                         index: 8,
                         length: 1
                     },
                     {
-                        token: " ",
+                        value: " ",
                         flags: TokenFlags.Whitespace,
                         index: 9,
                         length: 1
                     },
                     {
-                        token: "nothing",
+                        value: "nothing",
                         flags: TokenFlags.Word,
                         index: 10,
                         length: 7
                     },
                     {
-                        token: ".",
+                        value: ".",
                         flags: TokenFlags.Period,
                         index: 17,
                         length: 1
@@ -123,15 +123,15 @@ describe(`Tests the parser module.`, function () {
             const { description, ...expected } = spec;
 
             // Run the spec's token text thru the parser
-            const actual = parse(expected.token).tokens[0];
+            const actual = parse(expected.value).tokens[0];
 
-            expect(actual.token, `${description}: checking ${expected.token} = ${actual.token}`).to.equal(expected.token)
-            expect(actual.index, `${description}: checking ${expected.token}.index`).to.equal(expected.index)
-            expect(actual.length, `${description}: checking ${expected.token}.length`).to.equal(expected.length)
+            expect(actual.value, `${description}: checking ${expected.value} = ${actual.value}`).to.equal(expected.value)
+            expect(actual.index, `${description}: checking ${expected.value}.index`).to.equal(expected.index)
+            expect(actual.length, `${description}: checking ${expected.value}.length`).to.equal(expected.length)
 
             // Parsed token flags should match spec token flags
             expected.flags.forEach((flag) => {
-                checkHasFlags(description, actual.token, flag, actual.flags, log);
+                checkHasFlags(description, actual.value, flag, actual.flags, log);
             })
             //expect(actual, description).to.have.deep.equals(expected, description)
         })
@@ -142,15 +142,15 @@ describe(`Tests the parser module.`, function () {
             // Grab a description and token from the test data inputs
             const { description, ...expected } = spec;
 
-            let results = parse(expected.token);
+            let results = parse(expected.value);
             //console.log(results);
 
             // Run the spec's token text thru the parser
-            const actual = parse(expected.token).tokens[0];
+            const actual = parse(expected.value).tokens[0];
 
             // Parsed token flags should match spec token flags
             expected.flags.forEach((flag) => {
-                checkHasFlags(description, actual.token, flag, actual.flags, log);
+                checkHasFlags(description, actual.value, flag, actual.flags, log);
             })
             //expect(actual, description).to.have.deep.equals(expected, description)
         })

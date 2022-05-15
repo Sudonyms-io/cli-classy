@@ -2,7 +2,8 @@ import * as colors from 'ansi-colors';
 
 export type StyleDefinition = {
     flags: TokenFlags,
-    style: Function
+    style: Function,
+    clearTokens?: boolean;
 }
 
 /**
@@ -34,6 +35,5 @@ export enum TokenFlags {
     Exclamation = 1024,
     Punctuation = Period | Comma | Exclamation
 }
-
 
 export { colors }

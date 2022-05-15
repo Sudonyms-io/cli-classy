@@ -31,7 +31,7 @@ const TokenFlagsRegEx = new RegExp(TokenFlagsRegExMap.map((item) => {
  * Represents a parsed token.
  */
 export type Token = {
-    token: string;
+    value: string;
     flags: TokenFlags;
     index: number;
     length: number;
@@ -84,7 +84,7 @@ const parse = (inputs: string): Parsed => {
                     flags = TokenFlags.Punctuation;
                 }
                 results.push({
-                    token: token,
+                    value: token,
                     flags: flags,
                     index: matches.index,
                     length: token.length
