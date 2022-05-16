@@ -38,24 +38,33 @@ class Stylesheet {
      * 
      * @returns 
      */
-    public stylize() {
+    public apply() {
+        // Just in case...
         let _self = this;
         
-        return function (text) {
+        return function (text:string, strip: boolean=false) {
             const items = parse(text).tokens.map((token) => {
                 // Do we have a style definition for the specified flags?
                 const styleDef = _self.find(token.flags);
                 if (styleDef !== undefined && styleDef.stylize !== undefined && typeof styleDef.stylize === 'function') {
                     // We do have a style definition for the specified flags!
+                    
+                    let tv = token.value;
+                    if(strip == true) {
+                        // Caller wants to remove the token characters
+                        const re = /["'{}\[\]]/g;
+                        tv = tv.replace(re, '')
+                    }
                     // Call the style definition's stylize method
                     // and return the result.
-                    return styleDef.stylize(token.value, token);
+                    return styleDef.stylize(tv, token);
                 } else {
                     // No style definition for the specified flags... return the token's value
                     return token.value
                 }
             });
 
+            // Piece the parts of the string back together again
             return items.join('')
         }
     }

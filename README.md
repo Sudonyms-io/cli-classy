@@ -48,20 +48,19 @@ const colors = require('ansi-colors');
 ### 3. Create a stylesheet. ```Getting Classier```
 
 ``` javascript
-const stylesheet = new Stylesheet()
+const classyfy = new Stylesheet()
     .addStyle(TokenFlags.Braced, colors.greenBright)
     .addStyle(TokenFlags.Bracketed, colors.blueBright)
     .addStyle(TokenFlags.Punctuation, colors.cyan)
     .addStyle(TokenFlags.Quoted, colors.bgCyanBright.blue)
-    .stylize();
+    .apply();
 
-const ss = stylesheet; // Alias for shorter code
 ```
 
 ### 4. Run your text (with tokens) through the stylesheet. 
 
 ``` javascript
-console.log(ss("The quick [brown] fox jumped over the 'lazy dog', and the {cow} jumped over the moon! Enough said."));
+console.log(classyfy("The quick [brown] fox jumped over the 'lazy dog', and the {cow} jumped over the moon! Enough said."));
 ```
 
 ### 5. Bask in the glow of colorful console output... the easy (and, ```classy```!) way.
