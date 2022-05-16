@@ -18,7 +18,7 @@ export const cyanBright = (text: string) => {
 }
 
 const color = (start: number, text: string, end: number) => {
-    return `\x1b[${start}m ${text} \x1b[${end}m`
+    return `\x1b[${start}m${text}\x1b[${end}m`
 }
 
 
