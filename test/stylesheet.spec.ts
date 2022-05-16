@@ -1,21 +1,21 @@
 import Stylesheet, { TokenFlags } from '../src/stylesheet';
 import * as c from './colors'
 import { expect } from 'chai';
+import * as logger from './lib/logger';
+
+const LOGENTRY = logger.create(`START`);
+const log = (msg: string | object) => logger.log(LOGENTRY, msg);
+const debug = (msg: object) => logger.debug(LOGENTRY, msg);
+const error = (msg: string | object) => logger.error(LOGENTRY, msg);
+const warn = (msg: string | object) => logger.warn(LOGENTRY, msg);
 
 describe(`Tests the Stylesheet Module.`, function() {
 
-    let logs = [];
-    const log = (msg: any) => {
-        logs.push(`\t${msg}`)
-    }
-
     afterEach(() => {
-        if (process.env.DEBUG_MOCHA || process.env.MOCHA_DEBUG) {
-            while (logs.length > 0) {
-                console.log(logs.shift());
-            }
-        }
+        // Flush logging buffer after every test!
+        logger.flush(LOGENTRY);
     });
+
 
     it(`Tests Stylizing Console Output`, function (done) {
         const s = new Stylesheet()

@@ -92,7 +92,7 @@ export const flush = (log: TestLog) => {
                 break;
 
             default:
-                console.log(`${tab}${magentaBright(source)}: ${message}`);
+                console.log(tab + `${magentaBright(source)}: ${message}`);
                 break;
         }
     });
