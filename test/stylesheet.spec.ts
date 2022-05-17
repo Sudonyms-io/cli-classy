@@ -25,20 +25,40 @@ describe(`Tests the Stylesheet Module.`, function() {
             .apply();
 
         const TEST_TOKENS = [
-            `This`,
-            `"is"`,
-            `a`,
-            `test`,
-            `{bracket}`,
-            `{bracket phrase}`,
-            '[brace]',
-            '[brace phrase]',
-            `"quote"`,
-            `"quote phrase"`,
-            `'quote'`,
-            `'quote phrase'`
+            { token: `This` },
+            { token: ` ` },
+            { token: `"is"`, flags: TokenFlags.Quoted },
+            { token: ` ` },
+            { token: `a` },
+            { token: ` ` },
+            { token: `test` },
+            { token: ` ` },
+            { token: `{bracket}`, flags: TokenFlags.Bracketed },
+            { token: ` ` },
+            { token: `{bracket phrase}`, flags: TokenFlags.Bracketed },
+            { token: ` ` },
+            { token: '[brace]', flags: TokenFlags.Braced },
+            { token: ` ` },
+            { token: '[brace phrase]', flags: TokenFlags.Braced },
+            { token: ` ` },
+            { token: `"quote"` },
+            { token: ` ` },
+            { token: `"quote phrase"` },
+            { token: ` ` },
+            { token: `'quote'` },
+            { token: ` ` },
+            { token: `'quote phrase'` },
         ]
-        const input = TEST_TOKENS.join(" ");
+        const input = TEST_TOKENS.map((item) => {
+            return item.token
+        }).join('');
+
+        const output = TEST_TOKENS.map((item) => {
+            if(item.flags != undefined) {
+                
+            }
+            return item.token;
+        }).join('')
         const classyfied = classyfy(input, true);    
         log(classyfied);
         done();
