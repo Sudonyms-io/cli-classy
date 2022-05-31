@@ -1,6 +1,6 @@
 {
   "name": "cli-classy",
-  "version": "0.9.15",
+  "version": "0.7.15",
   "description": "Add color and style to your console output the classy way.",
   "main": "lib/index.js",
   "files": [
@@ -10,7 +10,7 @@
     "test": "nyc gulp test"
   },
   "keywords": [],
-  "author": "Sudo-Nymd, <sudo-nym@outlook.com> (https://github.com/sudo-nymd/cli-stylesheets)",
+  "author": "Sudo-Nymd, <sudo-nymd@outlook.com> (https://github.com/sudo-nymd/cli-stylesheets)",
   "license": "MIT",
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
@@ -37,5 +37,8 @@
   "bugs": {
     "url": "https://github.com/sudo-nymd/cli-classy/issues"
   },
-  "homepage": "https://github.com/sudo-nymd/cli-classy#readme"
+  "homepage": "https://github.com/sudo-nymd/cli-classy#readme",
+  "dependencies": {
+    "@sudo-nymd/text-parser": "^0.2.4"
+  }
 }

@@ -10,9 +10,9 @@
                 "--timeout",
                 "999999",
                 "--colors",
-                "${workspaceFolder}/test",
+                "${workspaceFolder}/__tests__",
                 "--config",
-                "./test/.mocharc.json"
+                "./__tests__/.mocharc.json"
             ],
             "internalConsoleOptions": "openOnSessionStart",
             "name": "Mocha Tests",

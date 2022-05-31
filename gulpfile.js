@@ -19,7 +19,7 @@ const COMMAND_CONFIG = {
     },
     TEST: {
         command: './node_modules/.bin/mocha',
-        args: ['--config', './test/.mocharc.json']
+        args: ['--config', './__tests__/.mocharc.json']
     },
     BUNDLE: {
         command: './node_modules/.bin/webpack-cli'
