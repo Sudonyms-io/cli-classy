@@ -12,6 +12,7 @@ describe(`It tests the "${ModuleName}" module.`, function() {
             .addStyle(colors.yellowBright.bold, ParsedTokenTypes.Punctuation)
             .addStyle(colors.greenBright, ParsedTokenTypes.Phrase, ParsedTokenFlags.Quoted)
             .addStyle(colors.bgCyanBright.bold.blackBright, ParsedTokenTypes.Phrase)
+            .addStyle(colors.bgMagentaBright, ParsedTokenTypes.Whitespace)
             .use(new Keywords().add('fox').plugin())
             .apply();
 
