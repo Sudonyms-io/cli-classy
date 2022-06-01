@@ -1,12 +1,13 @@
-import { Parser } from "@sudo-nymd/text-parser";
-import { PluginTokenSpec } from "@sudo-nymd/text-parser/lib/common/token-types";
+import { Parser, ParsedTokenFlags, ParsedTokenTypes,  } from "@sudo-nymd/text-parser";
+import { ParsedToken, PluginTokenSpec } from "@sudo-nymd/text-parser/lib/common/token-types";
+
 
 /**
  * A class for representing a stylesheet for a CLI.
  */
 class Stylesheet {
 
-    private _styles =[];
+    private _styles: StyleItem[];
     private _parser: Parser;
 
     /**
@@ -28,8 +29,8 @@ class Stylesheet {
      * @param callback The StyleFunction to perform the styling.
      * @returns A reference to the current stylesheet (enables "function chaining".)
      */
-    public addStyle(flags, callback): Stylesheet {
-        this._styles.push({ flags: flags, stylize: callback });
+    public addStyle(stylize, type: ParsedTokenTypes, flags: ParsedTokenFlags = ParsedTokenFlags.None): Stylesheet {
+        this._styles.push({ type, flags, stylize });
         return this;
     }
 
@@ -53,14 +54,34 @@ class Stylesheet {
         
         return function (text: string) {
             const buffer = [];
-            _self._parser.parse(text).forEach((token) => {
-                const { value } = token;
-                buffer.push(value);
-            });
+            _self._parser.parse(text, (token) => {
+                const { value, flags, type } = token;
+
+                const styler = _self._styles.find((style)=> {
+                    if(style.flags === ParsedTokenFlags.None) {
+                        return style.type === type;
+                    }
+                    return style.type === type && style.flags & flags;
+                });
+
+                if(styler !== undefined && styler.stylize !== undefined && typeof styler.stylize === 'function') {
+                    buffer.push(styler.stylize(value, token));
+                } else {
+                    buffer.push(value);
+                }                
+            })
 
             return buffer.join('');
         }
     }
+}
+
+export type StyleFunction = (text: string, token?: ParsedToken) => string;
+
+export type StyleItem = {
+    type: ParsedTokenTypes;
+    flags: ParsedTokenFlags;
+    stylize: StyleFunction;
 }
 
 const ModuleName = 'stylesheet';
