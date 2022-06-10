@@ -49,10 +49,10 @@ const colors = require('ansi-colors');
 
 ``` javascript
 const classyfy = new Stylesheet()
-    .addStyle(TokenFlags.Braced, colors.greenBright)
-    .addStyle(TokenFlags.Bracketed, colors.blueBright)
-    .addStyle(TokenFlags.Punctuation, colors.cyan)
-    .addStyle(TokenFlags.Quoted, colors.bgCyanBright.blue)
+    .addStyle(colors.greenBright, TokenFlags.Braced)
+    .addStyle(colors.blueBright, TokenFlags.Bracketed)
+    .addStyle(colors.cyan, TokenFlags.Punctuation)
+    .addStyle(colors.bgCyanBright.blue, TokenFlags.Quoted)
     .apply();
 
 ```

@@ -1,23 +1,23 @@
-import { ModuleName, Stylesheet } from '../src/stylesheet';
+import { ModuleName, ParsedTokenFlags, ParsedTokenTypes, Stylesheet } from '../src/stylesheet';
 import * as colors from 'ansi-colors';
-import { ParsedTokenFlags, ParsedTokenTypes } from '@sudo-nymd/text-parser';
+
 import { expect } from 'chai';
 import { Keywords } from '@sudo-nymd/text-parser/lib/plugins';
 
+
 describe(`It tests the "${ModuleName}" module.`, function() {
 
-    it(`Tests the apply() method`, function(done) {
+    it.only(`Tests the apply() method`, function(done) {
+        const colors = require('ansi-colors');
 
         const classyfy = new Stylesheet()
-            .addStyle(colors.yellowBright.bold, ParsedTokenTypes.Punctuation)
-            .addStyle(colors.greenBright, ParsedTokenTypes.Phrase, ParsedTokenFlags.Quoted)
-            .addStyle(colors.bgCyanBright.bold.blackBright, ParsedTokenTypes.Phrase)
-            .addStyle(colors.bgMagentaBright, ParsedTokenTypes.Whitespace)
-            .use(new Keywords().add('fox').plugin())
+            .addStyle(colors.greenBright, ParsedTokenTypes.Phrase)
+            .addStyle(colors.blueBright, ParsedTokenTypes.Phrase, ParsedTokenFlags.Bracketed)
+            .addStyle(colors.cyan, ParsedTokenTypes.Punctuation)
+            .addStyle(colors.bgCyanBright.blue, ParsedTokenTypes.Phrase, ParsedTokenFlags.Quoted)
             .apply();
 
-        const text = `The quick, [brown] fox "jumped over" the [lazy] dog!`;
-        console.log(classyfy(text));
+        console.log(classyfy("The quick [brown] fox jumped over the 'lazy dog', and the {cow} jumped over the moon! Enough said."));
 
         done();
     });

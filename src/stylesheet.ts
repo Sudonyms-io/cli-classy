@@ -1,5 +1,6 @@
-import { Parser, ParsedTokenFlags, ParsedTokenTypes,  } from "@sudo-nymd/text-parser";
-import { ParsedToken, PluginTokenSpec } from "@sudo-nymd/text-parser/lib/common/token-types";
+
+import { Parser } from "@sudo-nymd/text-parser";
+import { ParsedToken, ParsedTokenFlags, ParsedTokenTypes, PluginTokenSpec } from "@sudo-nymd/text-parser/lib/common/token-types";
 
 
 /**
@@ -86,4 +87,4 @@ export type StyleItem = {
 
 const ModuleName = 'stylesheet';
 
-export { Stylesheet, ModuleName };
+export { Stylesheet, ModuleName, ParsedToken, ParsedTokenFlags, ParsedTokenTypes };

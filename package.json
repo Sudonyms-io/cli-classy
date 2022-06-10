@@ -40,6 +40,6 @@
   },
   "homepage": "https://github.com/sudo-nymd/cli-classy#readme",
   "dependencies": {
-    "@sudo-nymd/text-parser": "^0.3.4"
+    "@sudo-nymd/text-parser": "^0.3.5"
   }
 }
