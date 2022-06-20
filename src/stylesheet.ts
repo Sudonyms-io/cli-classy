@@ -1,7 +1,11 @@
 
-import { Parser } from "@sudo-nymd/text-parser";
-import { ParsedToken, ParsedTokenFlags, ParsedTokenTypes, PluginTokenSpec } from "@sudo-nymd/text-parser/lib/common/token-types";
+//import { Parser } from '@sudo-nymd/text-parser';
+//import { PluginTokenSpec } from "@sudo-nymd/text-parser/lib/common/token-types";
+//import { ParsedTokenTypes, ParsedTokenFlags, ParsedToken } from "@sudo-nymd/text-parser/lib/parser";
 
+
+//import { ParsedToken, ParsedTokenFlags, ParsedTokenTypes, PluginTokenSpec } from "@sudo-nymd/text-parser/lib/common/token-types";
+import { ParsedToken, ParsedTokenFlags, ParsedTokenTypes, Parser, PluginTokenSpec, StyleFunction, plugins } from "./common";
 
 /**
  * A class for representing a stylesheet for a CLI.
@@ -77,8 +81,6 @@ class Stylesheet {
     }
 }
 
-export type StyleFunction = (text: string, token?: ParsedToken) => string;
-
 export type StyleItem = {
     type: ParsedTokenTypes;
     flags: ParsedTokenFlags;
@@ -87,4 +89,4 @@ export type StyleItem = {
 
 const ModuleName = 'stylesheet';
 
-export { Stylesheet, ModuleName, ParsedToken, ParsedTokenFlags, ParsedTokenTypes };
+export { Stylesheet, ModuleName, ParsedToken, ParsedTokenFlags, ParsedTokenTypes, plugins };
